@@ -25,7 +25,7 @@ SECRET_KEY = 'y@v5rdy*k94#czq-msyx7eqm7hts@9jsa-42h8dlxgzv@xgind'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['community.pythonanywhere.com','gustavop.pythonanywhere.com']
+ALLOWED_HOSTS = ['community.pythonanywhere.com','gustavop.pythonanywhere.com','127.0.0.1']
 
 
 # Application definition
@@ -110,10 +110,11 @@ TIME_ZONE = 'America/Sao_Paulo'
 
 USE_I18N = True
 
-USE_L10N = True
+USE_L10N = False
 
 USE_TZ = True
 
+DATE_INPUT_FORMATS = ['%Y-%m-%d']
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
