@@ -6,6 +6,6 @@ from .models import Pessoa
 # Create your views here.
 def pagina_aluno(request, inscricao):
 	aluno = Aluno.objects.get(id=inscricao)
-	transacoes = Transacoes.objects.filter(pessoa=aluno.pessoa)
+	transacoes = Transacoes.objects.filter(pessoa=aluno.pessoa).order_by('data')
     
 	return render(request, 'aluno.html', {'transacoes': transacoes, 'aluno': aluno})

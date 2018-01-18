@@ -1,23 +1,36 @@
+{% load staticfiles %}
+<!--https://docs.djangoproject.com/en/dev/ref/templates/builtins/#date -->
 <html>
     <head>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+
+    <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'css/dojo.css' %}">
         <title>Dojo</title>
     </head>
     <body>
-        <div>
-            <h1><a href="">Área Aluno</a></h1>
+        <div class="page-header">
+            <h3>Área do Aluno</h3>
         </div>
 
-        <div>
-        Nome: {{aluno.pessoa.nome}}
+        <div class="title-itens-list">
+        <h4>{{aluno.pessoa.nome}}</h4>
+        <h4>{{aluno.birth_date|date:"Y-m-d"}}</h4>
+        <h4>{{aluno.pessoa.telefone}}</h4>
 
-        <p>
-        Lista de pagamentos:
+
+        </div>
+
+        <div class="title-itens-list">
+            <h4>Lista de pagamentos</h4>
             {% for transacao in transacoes %}
                 <br>
-                Data {{transacao.data}} 
-                Valor {{transacao.valor}}
+                {{transacao.data|date:"Y-b-d"}} 
+                R${{transacao.valor|floatformat:2}}
             {% endfor %}
-        </p>
         </div>
     </body>
 </html>

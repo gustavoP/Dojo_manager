@@ -7,15 +7,16 @@ from datetime import datetime
 class Pessoa(models.Model):
     nome = models.CharField(max_length=100, blank=False)
     phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$',
-    		message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")
-    phone_number = models.CharField(validators=[phone_regex],
+    		message="Telefone deve ser neste formato: '+999999999'. no máximo 15 digitos são permitidos.")
+    telefone = models.CharField(validators=[phone_regex],
     	 max_length=17, 
-    	 blank=False) # validators should be a list
+    	 blank=False,
+    	 null=True) # validators should be a list
     observacoes = models.TextField(blank=True)
     #    author = models.ForeignKey('auth.User')
 
     def change_phone(self,new_phone):
-        self.phone_number = new_phone
+        self.telefone = new_phone
         self.save()
 
     def __str__(self):
@@ -87,4 +88,4 @@ class Transacoes(models.Model):
 	
 
 	def __str___(self):
-		return self.pessoa.__str__() + ' ' +str(self.data)+ ' ' + str(self.valor)
+		return (self.pessoa.__str__() + ' ' +str(self.data)+ ' ' + str(self.valor))
