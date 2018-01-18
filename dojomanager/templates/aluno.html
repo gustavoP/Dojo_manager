@@ -8,9 +8,16 @@
         </div>
 
         <div>
-            <p>Inscrição: 2012-10-04</p>
-            <h2><a href="">Nome</a></h2>
-            <p>meu nome completo.</p>
+        Nome: {{aluno.pessoa.nome}}
+
+        <p>
+        Lista de pagamentos:
+            {% for transacao in transacoes %}
+                <br>
+                Data {{transacao.data}} 
+                Valor {{transacao.valor}}
+            {% endfor %}
+        </p>
         </div>
     </body>
 </html>

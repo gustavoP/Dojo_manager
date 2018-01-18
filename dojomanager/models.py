@@ -87,4 +87,4 @@ class Transacoes(models.Model):
 	
 
 	def __str___(self):
-		return self.pessoa.__str__() + ' ' +str(data)+ ' ' + str(valor)
+		return self.pessoa.__str__() + ' ' +str(self.data)+ ' ' + str(self.valor)
