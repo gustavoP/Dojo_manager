@@ -16,8 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from dojomanager import views
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('aluno/<int:inscricao>', views.pagina_aluno),
+    path('aluno/login', auth_views.login, name='login'),
+    path('aluno/logout', auth_views.logout, name='logout'),
+    #path('', auth_views.login, name='login')
 ]

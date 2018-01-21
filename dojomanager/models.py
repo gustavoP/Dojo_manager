@@ -3,24 +3,27 @@ from django.utils import timezone
 from django.core.validators import RegexValidator
 #from django.core.validators import DecimalField
 from datetime import datetime
+from django.contrib.auth.models import User
 
 class Pessoa(models.Model):
-    nome = models.CharField(max_length=100, blank=False)
-    phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$',
-    		message="Telefone deve ser neste formato: '+999999999'. no máximo 15 digitos são permitidos.")
-    telefone = models.CharField(validators=[phone_regex],
-    	 max_length=17, 
-    	 blank=False,
-    	 null=True) # validators should be a list
-    observacoes = models.TextField(blank=True)
+	usuario = models.OneToOneField(User, 
+		on_delete=models.CASCADE)
+	nome = models.CharField(max_length=100, blank=False)
+	phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$',
+		message="Telefone deve ser neste formato: '+999999999'. no máximo 15 digitos são permitidos.")
+	telefone = models.CharField(validators=[phone_regex],
+		max_length=17, 
+    	blank=False,
+    	null=True) # validators should be a list
+	observacoes = models.TextField(blank=True)
     #    author = models.ForeignKey('auth.User')
 
-    def change_phone(self,new_phone):
-        self.telefone = new_phone
-        self.save()
+	def change_phone(self,new_phone):
+		self.telefone = new_phone
+		self.save()
 
-    def __str__(self):
-        return self.nome
+	def __str__(self):
+		return self.nome
 
 class Modalidade(models.Model):
 	nome = models.CharField(max_length=50, blank=False)
@@ -30,7 +33,7 @@ class Modalidade(models.Model):
 		return self.nome
 
 class Aluno(models.Model):
-    pessoa = models.ForeignKey(Pessoa, 
+    pessoa = models.OneToOneField(Pessoa, 
     	on_delete=models.CASCADE, 
     	related_name='pessoa', 
     	blank=False)
